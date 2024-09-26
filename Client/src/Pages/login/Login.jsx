@@ -52,10 +52,19 @@ const LoginScreen = () => {
               avatar={<Avatar src={googleIcon} alt="icon" />}
             />
           </div>
-          <div className="or">or</div>
-          <div><TextField id="outlined-basic" label="Email" variant="outlined" sx={{width:'350px'}}/></div>
-          <div><TextField id="outlined-basic" label="Password" type="password" variant="outlined" sx={{width:'350px'}} /></div>
-          <div><Button variant="contained" sx={{backgroundColor:"#6C63FF",borderRadius:"20px",width:'260px'}}>Login</Button></div>
+          <span className="mx-2">or</span>
+
+          <div><TextField id="outlined-basic" label="Email" variant="outlined" sx={{ width: '350px' }} /></div>
+          <div>
+            <TextField id="outlined-basic" label="Password" type="password" variant="outlined" sx={{ width: '350px' }} />
+            <div className="forgetPassword flex  justify-between items-center font-bold">
+
+              <p>Forgot your <span className='themeClr'>Password?</span></p>
+              <p>or Register</p>
+            </div>
+            </div>
+
+          <div><Button variant="contained" sx={{ backgroundColor: "#6C63FF", borderRadius: "20px", width: '260px' }}>Login</Button></div>
         </div>
       </div>
     </div>
