@@ -85,6 +85,9 @@ const Signup = () => {
               variant="outlined"
               sx={{ width: "350px" }}
             />
+            <div className="forgetPassword flex  justify-end items-center font-bold">
+              <p>or Login</p>
+            </div>
           </div>
           <div>
             <Button
@@ -95,7 +98,7 @@ const Signup = () => {
                 width: "260px",
               }}
             >
-              Login
+              Create New Account
             </Button>
           </div>
         </div>
