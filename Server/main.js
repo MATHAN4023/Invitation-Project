@@ -11,7 +11,7 @@ const Tech_Logic = require('./Technical_Logic_Layer/Logic');
 const { verifyToken } = require('./Common_Layer/Verify_token');
 
 app.use(cors({
-    origin: 'http://localhost:3001', // Allow only this origin
+    origin: 'http://localhost:5173', // Allow only this origin
     methods: ['GET', 'POST'], // Specify the allowed methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify the allowed headers
 }));
