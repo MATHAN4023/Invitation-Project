@@ -12,8 +12,11 @@ import Button from "@mui/material/Button";
 // Import Asserts
 import googleIcon from "../../assets/googleIcon.jpg";
 
+// import libraries
+import { Link } from 'react-router-dom';
 
 import { useState } from "react";
+import GloginBtn from "../../component/GoogleLogin/GloginBtn";
 
 const Signup = () => {
   const [open, setOpen] = useState(false);
@@ -24,6 +27,8 @@ const Signup = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+ 
 
   return (
     // FullContainer
@@ -45,12 +50,13 @@ const Signup = () => {
         <div className="flex flex-col justify-center items-center w-full gap-8">
           <div className="themeClr text-2xl uppercase font-bold">logo</div>
           <div>
-            <Chip
+            {/* <Chip
               label="Login Through Google"
               variant="outlined"
               onClick={googleAuth}
               avatar={<Avatar src={googleIcon} alt="icon" />}
-            />
+            /> */}
+            <GloginBtn />
           </div>
           <div className="or">or</div>
           <div>
@@ -86,7 +92,8 @@ const Signup = () => {
               sx={{ width: "350px" }}
             />
             <div className="forgetPassword flex  justify-end items-center font-bold">
-              <p>or Login</p>
+              <Link to="/login">or Login</Link>
+              {/* <p>or Login</p> */}
             </div>
           </div>
           <div>

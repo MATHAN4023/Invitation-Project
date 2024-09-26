@@ -13,8 +13,12 @@ import Button from '@mui/material/Button';
 // Import Asserts
 import googleIcon from '../../assets/googleIcon.jpg';
 
+// import libraries
+import { Link } from 'react-router-dom';
+
 import { useState } from 'react';
 import Onboardleft from '../../component/Onboarding/Onboardleft';
+import GloginBtn from '../../component/GoogleLogin/GloginBtn';
 
 const LoginScreen = () => {
   const [open, setOpen] = useState(false);
@@ -45,12 +49,13 @@ const LoginScreen = () => {
         <div className="flex flex-col justify-center items-center w-full gap-8">
           <div className='themeClr text-2xl uppercase font-bold'>logo</div>
           <div>
-            <Chip
+            {/* <Chip
               label="Login Through Google"
               variant="outlined"
               onClick={googleAuth}
               avatar={<Avatar src={googleIcon} alt="icon" />}
-            />
+            /> */}
+            <GloginBtn />
           </div>
           <span className="mx-2">or</span>
 
@@ -60,7 +65,7 @@ const LoginScreen = () => {
             <div className="forgetPassword flex  justify-between items-center font-bold">
 
               <p>Forgot your <span className='themeClr'>Password?</span></p>
-              <p>or Register</p>
+              <Link to="/signup">or Register</Link>
             </div>
             </div>
 
