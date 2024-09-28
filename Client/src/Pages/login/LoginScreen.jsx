@@ -9,6 +9,7 @@ import { useState } from "react";
 import Onboardleft from "../../component/Onboarding/Onboardleft";
 import GloginBtn from "../../component/GoogleLogin/GloginBtn";
 import { useAuth } from "../context/AuthContext"; // Import AuthContext
+import { IconButton, SnackbarContent } from "@mui/material";
 
 const LoginScreen = () => {
   const { login } = useAuth(); // Get login function from context
@@ -16,13 +17,14 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const [resMsg, setresMsg] = useState("")
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleLogin = async () => {
     if (!email || !password) {
+      setresMsg("Email or Password can't be empty");
       setOpen(true); // Show snackbar for error
       return;
     }
@@ -46,10 +48,12 @@ const LoginScreen = () => {
         console.log("Navigating to home...");
         navigate("/home"); // Redirect to home page
       } else {
+        setresMsg(data.message);
         setOpen(true); // Show snackbar for error
       }
     } catch (error) {
       console.error("Login failed:", error);
+      setresMsg(error);
       setOpen(true); // Show snackbar for error
     }
   };
@@ -58,10 +62,26 @@ const LoginScreen = () => {
     <div className="flex flex-col md:flex-row h-screen">
       <Snackbar
         open={open}
-        autoHideDuration={1000}
+        autoHideDuration={2000}
         onClose={handleClose}
-        message="Login failed. Please check your credentials."
-      />
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <SnackbarContent
+          style={{ backgroundColor: 'orange' , color:'black' }} // Set your warning color here
+          message={resMsg}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              {/* <CloseIcon fontSize="small" /> */}
+            </IconButton>
+          }
+        />
+      </Snackbar>
+
 
       {/* Onboarding Left  */}
       <div className="hidden md:flex flex-1 leftContainer">
@@ -97,9 +117,9 @@ const LoginScreen = () => {
             />
             <div className="forgetPassword flex justify-between items-center font-bold">
               <Link to="/forget-password">
-              <p>
-                Forgot your <span className="themeClr">Password?</span>
-              </p>
+                <p>
+                  Forgot your <span className="themeClr">Password?</span>
+                </p>
               </Link>
               <Link to="/signup">or Register</Link>
             </div>
