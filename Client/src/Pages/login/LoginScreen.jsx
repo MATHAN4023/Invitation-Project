@@ -55,7 +55,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col md:flex-row h-screen">
       <Snackbar
         open={open}
         autoHideDuration={1000}
@@ -64,18 +64,17 @@ const LoginScreen = () => {
       />
 
       {/* Onboarding Left  */}
-      <div className="flex-1 leftContainer">
+      <div className="hidden md:flex flex-1 leftContainer">
         <Onboardleft />
       </div>
 
-      <div className="flex-1 bg-white p-8 flex">
+      <div className="flex-1 bg-white p-4 md:p-8 flex">
         <div className="flex flex-col justify-center items-center w-full gap-8">
           <div className="themeClr text-2xl uppercase font-bold">logo</div>
           <div>
-            <GloginBtn /> {/* Google Login Button */}
+            <GloginBtn />
           </div>
           <span className="mx-2">or</span>
-
           <div>
             <TextField
               id="email" // Unique ID for email field
@@ -97,20 +96,22 @@ const LoginScreen = () => {
               sx={{ width: "350px" }}
             />
             <div className="forgetPassword flex justify-between items-center font-bold">
+              <Link to="/forget-password">
               <p>
                 Forgot your <span className="themeClr">Password?</span>
               </p>
+              </Link>
               <Link to="/signup">or Register</Link>
             </div>
           </div>
 
-          <div>
+          <div className="w-full flex justify-center">
             <Button
               variant="contained"
               sx={{
                 backgroundColor: "#6C63FF",
                 borderRadius: "20px",
-                width: "260px",
+                width: "40%",
               }}
               onClick={handleLogin} // Call handleLogin on button click
             >

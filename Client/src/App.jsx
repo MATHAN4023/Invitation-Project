@@ -4,6 +4,7 @@ import ProtectedRoute from './Pages/context/ProtectedRoute'; // Adjust path as n
 import LoginScreen from './Pages/Login/LoginScreen';
 import HomeScreen from './Pages/Home/HomeScreen';
 import Signup from './Pages/Signup/Signup';
+import OtpScreen from './Pages/forgetPassword/OtpScreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forget-password" element={<OtpScreen />} />
           <Route
             path="/home"
             element={

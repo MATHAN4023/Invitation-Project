@@ -1,7 +1,8 @@
 // GloginBtn.jsx
 import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
-
+import { Avatar, Chip } from '@mui/material';
+import gIcon from '../../assets/googleIcon.jpg'
 
 const GloginBtn = () => {
   const navigate = useNavigate();
@@ -33,7 +34,20 @@ const GloginBtn = () => {
     onError: (error) => console.error('Google login error:', error),
   });
 
-  return <button onClick={() => login()}>Login with Google</button>;
+  // return <button onClick={() => login()}>Login with Google</button>;
+  return (
+    <Chip
+    label="Google"
+    variant="outlined"
+    onClick={() => login()}
+    avatar={
+      <Avatar>
+        <img src={gIcon} alt='google' />
+        {/* <GoogleIcon /> */}
+      </Avatar>
+    }
+  />
+  );
 };
 
 export default GloginBtn;

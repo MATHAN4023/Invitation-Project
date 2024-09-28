@@ -20,7 +20,7 @@ router.post('/signup', async (req, res) => {
     if (googleId) {
       const newUser = new User({ name, email, googleId });
       await newUser.save();
-      return res.status(201).json({ message: 'Google signup successful', user: newUser });
+      return res.status(201).json({ message: 'Google signup successful', user: newUser , code:200});
     }
 
     // If no Google ID, create user with a hashed password (for email/password signup)
@@ -30,10 +30,10 @@ router.post('/signup', async (req, res) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    res.status(201).json({ message: 'User created successfully', user: newUser });
+    res.status(201).json({ message: 'User created successfully', user: newUser  , code:200});
   } catch (error) {
     console.error('Error during signup:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Poor Internet Connection' });
   }
 });
 
