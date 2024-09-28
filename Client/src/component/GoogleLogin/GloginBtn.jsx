@@ -1,27 +1,25 @@
-// libraries
 import { GoogleLogin } from 'react-google-login';
 
 const GloginBtn = () => {
-    const handleLoginSuccess = (response) => {
-        console.log("Login Success: currentUser:", response.profileObj);
-        // Handle successful login here (e.g., store user info, redirect, etc.)
-      };
-    
-      const handleLoginFailure = (response) => {
-        console.error("Login failed: res:", response);
-        // Handle login failure here
-      };
-    return (
-        <div>
-            <GoogleLogin
-                clientId="YOUR_CLIENT_ID.apps.googleusercontent.com" // Replace with your Client ID
-                buttonText="Login with Google"
-                onSuccess={handleLoginSuccess}
-                onFailure={handleLoginFailure}
-                cookiePolicy={'single_host_origin'}
-            />
-        </div>
-    )
-}
+  const CLIENT_ID = '711398778211-da6j0qcd4vib14iq28ua36r1ge03rsj2.apps.googleusercontent.com';
 
-export default GloginBtn
+  const handleLoginSuccess = (response) => {
+    console.log('Login Success:', response);
+  };
+
+  const handleLoginFailure = (response) => {
+    console.error('Login failed:', response);
+  };
+
+  return (
+    <GoogleLogin
+      clientId={CLIENT_ID}
+      buttonText="Login with Google"
+      onSuccess={handleLoginSuccess}
+      onFailure={handleLoginFailure}
+      cookiePolicy={'single_host_origin'}
+    />
+  );
+};
+
+export default GloginBtn;
