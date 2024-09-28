@@ -8,13 +8,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 // Import libraries
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import GloginBtn from "../../component/GoogleLogin/GloginBtn";
 import axios from "axios"; // Import Axios for making HTTP requests
 import GsignupBtn from "../../component/GoogleLogin/GsignupBtn";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -89,9 +90,12 @@ const Signup = () => {
         password,
         marriageDate, // Include marriage date if needed
       });
-      
+
       // Handle successful registration (e.g., navigate to login)
-      console.log(response.data);
+      console.log(response.data.code);
+      if (response.data.code === 200) {
+        navigate('/login');
+      }
       setOpen(true); // Show Snackbar for success
     } catch (error) {
       if (error.response) {
@@ -128,7 +132,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col md:flex-row h-screen">
       <Snackbar
         open={open}
         autoHideDuration={1000}
@@ -136,45 +140,45 @@ const Signup = () => {
         message="Registration successful!"
       />
 
-      <div className="flex-1 leftContainer">
+      {/* Left Container (Onboarding Image Section) */}
+      <div className="hidden md:flex flex-1 leftContainer">
         <Onboardleft />
       </div>
 
-      <div className="flex-1 bg-white p-8 flex">
-        <div className="flex flex-col justify-center items-center w-full gap-8">
+      {/* Right Container (Signup Form Section) */}
+      <div className="flex-1 bg-white p-8 flex justify-center items-center w-full">
+        <div className="flex flex-col justify-center items-center w-full md:gap-4 max-w-lg">
           <div className="themeClr text-2xl uppercase font-bold">logo</div>
-          <div>
-            <GsignupBtn />
-          </div>
+          {/* <GsignupBtn /> */} 
+          <GloginBtn />
           <div className="or">or</div>
-          <div>
-            {errors.general && <div className="error-message text-red-600">{errors.general}</div>}
-          </div>
-          <div>
+          {errors.general && <div className="error-message text-red-600">{errors.general}</div>}
+          <div className="w-full flex justify-center">
             <TextField
               name="email"
               value={email}
               onChange={handleChange}
               label="Email"
               variant="outlined"
-              sx={{ width: "350px" }}
+              // fullWidth
+              sx={{ width: '60%' }}
               error={!!errors.email}
               helperText={errors.email}
             />
           </div>
-          <div>
+          <div className="w-full flex justify-center">
             <TextField
               name="name"
               value={name}
               onChange={handleChange}
               label="Name"
               variant="outlined"
-              sx={{ width: "350px" }}
+              sx={{ width: '60%' }}
               error={!!errors.name}
               helperText={errors.name}
             />
           </div>
-          <div>
+          <div className="w-full flex justify-center">
             <TextField
               name="password"
               value={password}
@@ -182,40 +186,41 @@ const Signup = () => {
               label="Password"
               type="password"
               variant="outlined"
-              sx={{ width: "350px" }}
+              sx={{ width: '60%' }}
               error={!!errors.password}
               helperText={errors.password}
             />
           </div>
-          <div>
+          <div className="textWithNavigate w-full flex flex-col items-center">
             <TextField
               name="marriageDate"
               value={marriageDate}
               onChange={handleChange}
               label="Marriage Date"
-              type="date" // Set the input type to date
+              type="date"
               variant="outlined"
-              sx={{ width: "350px" }}
+              sx={{ width: '60%' }}
               error={!!errors.marriageDate}
               helperText={errors.marriageDate}
               InputLabelProps={{
-                shrink: true, // Keeps the label above the input when selected
+                shrink: true,
               }}
               InputProps={{
-                style: { padding: "1px" }, // Add some padding to the input field
+                style: { padding: "1px" },
               }}
             />
-            <div className="forgetPassword flex justify-end items-center font-bold">
+            <div className="forgetPassword w-full flex justify-end items-center font-bold mt-2" style={{ width: '60%' }}>
               <Link to="/login">or Login</Link>
             </div>
           </div>
-          <div>
+
+          <div className="w-full flex justify-center">
             <Button
               variant="contained"
               sx={{
                 backgroundColor: "#6C63FF",
                 borderRadius: "20px",
-                width: "260px",
+                width: "40%",
               }}
               onClick={handleSubmit} // Call handleSubmit on button click
             >

@@ -8,9 +8,14 @@ import { useAuth } from '../../Pages/context/AuthContext'; // Adjust the path as
 import { useNavigate } from 'react-router-dom';
 
 const AppBarComponent = () => {
-    const { user, logout } = useAuth(); // Get user and logout function from context
-    console.log("user",user);
-    
+    const { currentUser ,login, logout } = useAuth(); // Get user and logout function from context
+    console.log("user",currentUser);
+    const { username, email } = currentUser;
+    console.log("Username:", username);
+    // const token = localStorage.getItem('token', token);
+    // const decodedToken = jwt_decode(token);
+    // console.log('Decoded token:', token);
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -22,13 +27,14 @@ const AppBarComponent = () => {
         <AppBar position="static" sx={{ backgroundColor: '#6C63FF' }}>
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Welcome, {user?.username} {/* Display username */}
+                    Welcome Designer
+                    {/* , {user?.username}  */}
                 </Typography>
                 <Typography variant="subtitle1" sx={{ marginRight: 2 }}>
-                    {user?.email} {/* Display email */}
+                    {/* {user?.email}  */}
                 </Typography>
                 <Button color="inherit" onClick={handleLogout}>
-                    Logout {/* Logout button */}
+                    Logout
                 </Button>
             </Toolbar>
         </AppBar>
