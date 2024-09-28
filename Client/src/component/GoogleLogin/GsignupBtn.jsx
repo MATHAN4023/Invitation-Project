@@ -1,10 +1,10 @@
-import { GoogleLogin } from 'react-google-login';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 const GsignupBtn = () => {
   const CLIENT_ID = '711398778211-da6j0qcd4vib14iq28ua36r1ge03rsj2.apps.googleusercontent.com'; // Replace with your actual Client ID
 
-  const handleSignupSuccess = async (response) => {
-    const { profileObj } = response;
+  const handleSignupSuccess = async (credentialResponse) => {
+    const userObject = jwt_decode(credentialResponse.credential); // Use jwt-decode to get user info from the token
 
     // Send profile info to your backend for signup
     try {
@@ -14,8 +14,8 @@ const GsignupBtn = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: profileObj.name,
-          email: profileObj.email,
+          name: userObject.name,
+          email: userObject.email,
         }),
       });
 
@@ -33,19 +33,19 @@ const GsignupBtn = () => {
     }
   };
 
-  const handleSignupFailure = (response) => {
-    console.error('Signup failed:', response);
-    alert(`Signup failed: ${response.error}. Details: ${response.details}`);
+  const handleSignupFailure = (error) => {
+    console.error('Signup failed:', error);
+    alert(`Signup failed: ${error}`);
   };
 
   return (
-    <GoogleLogin
-      clientId={CLIENT_ID}
-      buttonText="Sign up with Google"
-      onSuccess={handleSignupSuccess}
-      onFailure={handleSignupFailure}
-      cookiePolicy={'single_host_origin'}
-    />
+    <GoogleOAuthProvider clientId={CLIENT_ID}>
+      <GoogleLogin
+        onSuccess={handleSignupSuccess}
+        onFailure={handleSignupFailure}
+        cookiePolicy={'single_host_origin'}
+      />
+    </GoogleOAuthProvider>
   );
 };
 
