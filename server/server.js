@@ -41,7 +41,7 @@ const authenticateToken = (req, res, next) => {
   jwt.verify(token, secretKey, (err, user) => {
     if (err) return res.sendStatus(403); // Invalid token
     req.user = user; // Save user info to request
-    next();
+    next(); // Continue to the next middleware or route handler
   });
 };
 
