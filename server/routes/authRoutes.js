@@ -40,11 +40,10 @@ router.post('/signup', async (req, res) => {
 // Login route (Email/Password)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   try {
     // Find user by email
-    const trimmedEmail = email.trim();
-    const user = await User.findOne({ trimmedEmail });
-    console.log(email ,"test enter",user);
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -55,7 +54,6 @@ router.post('/login', async (req, res) => {
     }
 
     // Compare the provided password with the hashed password in the database
-    
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
