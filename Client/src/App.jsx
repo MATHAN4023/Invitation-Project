@@ -7,6 +7,7 @@ import Signup from './Pages/Signup/Signup';
 import OtpScreen from './Pages/forgetPassword/OtpScreen';
 
 function App() {
+  // test comit
   return (
     <AuthProvider>
       <Router>
