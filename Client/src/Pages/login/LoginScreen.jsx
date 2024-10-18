@@ -10,6 +10,7 @@ import Onboardleft from "../../component/Onboarding/Onboardleft";
 import GloginBtn from "../../component/GoogleLogin/GloginBtn";
 import { useAuth } from "../context/AuthContext"; // Import AuthContext
 import { IconButton, SnackbarContent } from "@mui/material";
+import GlogleSignInBtn from "../../component/GoogleLogin/GlogleSignInBtn";
 
 const LoginScreen = () => {
   const { login } = useAuth(); // Get login function from context
@@ -92,7 +93,9 @@ const LoginScreen = () => {
         <div className="flex flex-col justify-center items-center w-full gap-8">
           <div className="themeClr text-2xl uppercase font-bold">logo</div>
           <div>
-            <GloginBtn />
+            {/* <GloginBtn /> */}
+            <GlogleSignInBtn />
+
           </div>
           <span className="mx-2">or</span>
           <div>
